@@ -76,10 +76,37 @@ if (seznamFilmuElement) {
 						<p class="card-text">
 						${film.ochutnavka}
 						</p>
-						<a href="film.html" class="btn btn-primary">Přehrát</a>
+						<a href="film.html?#${film.id}" class="btn btn-primary">Přehrát</a>
 					</div>
 				</div>
 			</div>
 		`
 	})
+}
+
+/*
+Úkol
+Na stránce s detailem filmu zobraz příslušné informace.
+- Nejdříve v přechozím kódu pro úvodní obrazovku uprav odkaz `href` tak, aby obsahoval identifikátor konkrétního filmu. Nápověda: `<a href="film.html?#${film.id}"`>Přehrát</a>. Díky tomu pak na detailu bude možné zjistit, který konkrétní film si chce uživatel pustit.
+- Zařiď, aby se následující kód vykonal pouze v případě, že na stránce je prvek s id `detail-filmu`.
+- Zjisti, na film s jakým `id` se uživatel chce dívat kódem `location.hash`. Všimni si, že vlastnost `hash` začíná znakem mřížky (`#`). Id v poli `filmy` mřížkou nezačínají. Mřížku vhodnou metodou na řetězcích odřízni. Není potřeba.
+- Cyklem prohledej pole `filmy` a film se stejným id si poznamenej do proměnné.
+- Vepiš informace o nalezeném filmu do stránky. Uprav textový obsah a atributy příslušných potomků prvku `#detail-filmu`. Do `.card-text` vepiš dlouhý popis filmu.
+*/
+
+const detailFilmuElement = document.querySelector('#detail-filmu')
+if (detailFilmuElement) {
+	const idFilmu = location.hash.substring(1)
+	let film
+	filmy.forEach((porovnavanyFilm) => {
+		if (porovnavanyFilm.id === idFilmu) {
+			film = porovnavanyFilm
+		}
+	})
+	detailFilmuElement.querySelector('.card-title').textContent = film.nazev
+	detailFilmuElement.querySelector('.card-text').textContent = film.popis
+	const plakat = detailFilmuElement.querySelector('.img-fluid')
+	plakat.src = film.plakat.url
+	plakat.width = film.plakat.sirka
+	plakat.height = film.plakat.vyska
 }
