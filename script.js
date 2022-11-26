@@ -12,6 +12,7 @@ const filmy = [
 		ochutnavka: 'Romantické Sci-Fi z blízké budoucnosti',
 		popis:
 			'Děj snímku Her se odehrává v Los Angeles v nedaleké budoucnosti. Theodore (Joaquin Phoenix) je komplikovaný a citlivý muž, který se živí psaním dojemných a osobních dopisů pro druhé. Se zlomeným srdcem po ukončení dlouhého vztahu se začne zajímat o nový, pokročilý operační systém, o kterém jeho výrobce tvrdí, že představuje zcela unikátní a intuitivní bytost. Po jeho instalaci se seznamuje se „Samanthou", umělou inteligencí s milým ženským hlasem (Scarlett Johansson), která má zajímavé postřehy, je citlivá a překvapivě vtipná. Jak její potřeby a požadavky rostou společně s těmi jeho, mění se jejich přátelství ve skutečnou vzájemnou lásku. (csfd.cz, Falcon)',
+		premiera: '18. 12. 2013',
 	},
 	{
 		id: 'vlastnici',
@@ -24,6 +25,7 @@ const filmy = [
 		ochutnavka: 'Česká komedie.',
 		popis:
 			'Paní Zahrádková (Tereza Voříšková) s manželem (Vojta Kotek) idealisticky chtějí, aby společnými silami dům zachránili. Novomanželé Bernáškovi (Jiří Černý, Maria Sawa) se s nadšením připojují. Paní Roubíčková (Klára Melíšková) pedantsky kontroluje řádný průběh schůze. Paní Horvátová (Dagmar Havlová) všechno iniciativně komentuje. Naivní pan Švec (David Novotný) zastupuje svojí maminku. Paní Procházková (Pavla Tomicová) s panem Novákem (Ondřej Malý) hledá způsoby jak zhodnotit svůj majetek. Pan Nitranský (Andrej Polák) touží po půdě v domě a pan Kubát (Jiří Lábus) důsledně sabotuje jakékoliv rozhodnutí. A v pozadí číhají bratři Čermákovi (Kryštof Hádek, Stanislav Majer), jen starý pan profesor Sokol (Ladislav Trojan) zatím nic nekomentuje… (csfd.cz, CinemArt)',
+		premiera: '19. 11. 2019',
 	},
 ]
 
@@ -92,6 +94,12 @@ Na stránce s detailem filmu zobraz příslušné informace.
 - Zjisti, na film s jakým `id` se uživatel chce dívat kódem `location.hash`. Všimni si, že vlastnost `hash` začíná znakem mřížky (`#`). Id v poli `filmy` mřížkou nezačínají. Mřížku vhodnou metodou na řetězcích odřízni. Není potřeba.
 - Cyklem prohledej pole `filmy` a film se stejným id si poznamenej do proměnné.
 - Vepiš informace o nalezeném filmu do stránky. Uprav textový obsah a atributy příslušných potomků prvku `#detail-filmu`. Do `.card-text` vepiš dlouhý popis filmu.
+
+Ukol
+Pomocí dayjs spočítejte, za kolik dní bude premiéra nebo jak je to od premiéry dávno.
+... @TODO: dayjs("18. 12. 2013", "D. M. YYYY")
+... do filmy.html přidat dayjs z CDN?
+... Možná měsíc 12 napsat jako prosince?
 */
 
 const detailFilmuElement = document.querySelector('#detail-filmu')
