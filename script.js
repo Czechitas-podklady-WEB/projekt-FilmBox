@@ -119,11 +119,11 @@ Na stránce s detailem filmu zobraz příslušné informace.
 - Cyklem prohledej pole `filmy` a film se stejným id si poznamenej do proměnné.
 - Vepiš informace o nalezeném filmu do stránky. Uprav textový obsah a atributy příslušných potomků prvku `#detail-filmu`. Do `.card-text` vepiš dlouhý popis filmu.
 
-Ukol
+Úkol
 Pomocí dayjs spočítejte, za kolik dní bude premiéra nebo jak je to od premiéry dávno.
 - Do filmy.html přidej dayjs z CDN <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 - Spočítej rozdíl ve dnech mezi dneškem a datumem premiéry pomocí metody diff().
-- Do elementu s id #premiera věpiš, kdy byla/bude premiéra a před kolika dny nebo za kolik dní bude nebo jestli je dnes.
+- Do elementu s id #premiera vepiš, kdy byla/bude premiéra a před kolika dny nebo za kolik dní bude nebo jestli je dnes.
 - BONUS: Zařiď, aby slovo tvar slova den byl ve správném tvaru, aby se třeba nestalo "což bylo před 1 dní"
 */
 
@@ -144,29 +144,34 @@ if (detailFilmuElement) {
 	plakat.height = film.plakat.vyska
 
 	const premieraElm = document.querySelector('#premiera')
-    const premiera = dayjs(film.premiera)
-    const dnes = dayjs()
-    const rozdilDnu = premiera.diff(dnes, 'days')
-    let dnyRetezec
+	const premiera = dayjs(film.premiera)
+	const dnes = dayjs()
+	const rozdilDnu = premiera.diff(dnes, 'days')
+	let dnyRetezec
 
-    if (rozdilDnu === 0) {
-        premieraElm.innerHTML = `Premiéra <strong>${premiera.format("D. M. YYYY")}</strong>, což je dnes.`
-    } else if (dnes.isAfter(premiera)) {
-        if (rozdilDnu === -1) {
-            dnyRetezec = "dnem"
-        } else {
-            dnyRetezec = "dny"
-        }
-        premieraElm.innerHTML = `Premiéra <strong>${premiera.format("D. M. YYYY")}</strong>, což bylo před ${-premiera.diff(dnes, 'days')} ${dnyRetezec}.`
-    } else {
-        if (rozdilDnu === 1) {
-            dnyRetezec = "dnem"
-        } else if (rozdilDnu === 2 || rozdilDnu === 3 || rozdilDnu === 4) {
-            dnyRetezec = "dny"
-        } else {
-            dnyRetezec = "dní"
-        }
-        premieraElm.innerHTML = `Premiéra <strong>${premiera.format("D. M. YYYY")}</strong>, což bude za ${premiera.diff(dnes, 'days')} ${dnyRetezec}.`
-    }
-
+	if (rozdilDnu === 0) {
+		premieraElm.innerHTML = `Premiéra <strong>${premiera.format(
+			'D. M. YYYY',
+		)}</strong>, což je dnes.`
+	} else if (dnes.isAfter(premiera)) {
+		if (rozdilDnu === -1) {
+			dnyRetezec = 'dnem'
+		} else {
+			dnyRetezec = 'dny'
+		}
+		premieraElm.innerHTML = `Premiéra <strong>${premiera.format(
+			'D. M. YYYY',
+		)}</strong>, což bylo před ${-premiera.diff(dnes, 'days')} ${dnyRetezec}.`
+	} else {
+		if (rozdilDnu === 1) {
+			dnyRetezec = 'dnem'
+		} else if (rozdilDnu === 2 || rozdilDnu === 3 || rozdilDnu === 4) {
+			dnyRetezec = 'dny'
+		} else {
+			dnyRetezec = 'dní'
+		}
+		premieraElm.innerHTML = `Premiéra <strong>${premiera.format(
+			'D. M. YYYY',
+		)}</strong>, což bude za ${premiera.diff(dnes, 'days')} ${dnyRetezec}.`
+	}
 }
