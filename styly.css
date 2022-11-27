@@ -1,3 +1,8 @@
+body {
+	padding-bottom: 5rem;
+	overflow-y: scroll;
+}
+
 img {
 	height: auto;
 }
