@@ -31,6 +31,30 @@ const filmy = [
 
 /*
 Úkol
+Oživ rozbalovací horní navigaci na úzkých obrazovkách. Po kliknutí na tlačítko se třemi proužky zobraz položky menu. Na další kliknutí je zase schovej.
+- Zúži si zobrazení webové stránky tak, aby se v horní navigaci zobrazovalo jen tlačítko se třemi proužky.
+- Vyhledej prvek s id `menu-tlacitko`.
+- Zařiď posluchačem událostí, aby po kliknutí na tlačítko dostal prvek s id `menu-polozky` třídu `show`.
+- Otestuj, že po kliknutí se menu rozbaluje, ukazují se další odkazy na podstránky.
+- Rozšiř kód tak, aby každé další klikání menu zabalovala a rozbalovala.
+- Pokud je menu rozbalené, změň obsah tlačítka na `<i class="fas fa-xmark"></i>`.
+- Pokud je menu zabalené, nastav obsah tlačítka zpět na `<i class="fas fa-bars"></i>`.
+*/
+
+const menuTlacitkoElement = document.querySelector('#menu-tlacitko')
+const menuPolozkyElement = document.querySelector('#menu-polozky')
+menuTlacitkoElement.addEventListener('click', () => {
+	menuPolozkyElement.classList.toggle('show')
+
+	if (menuPolozkyElement.classList.contains('show')) {
+		menuTlacitkoElement.innerHTML = '<i class="fas fa-xmark"></i>'
+	} else {
+		menuTlacitkoElement.innerHTML = '<i class="fas fa-bars"></i>'
+	}
+})
+
+/*
+Úkol
 Vypiš na úvodní stránce filmy z javascriptového pole.
 - Vyhledej na stránce prvek s id `seznam-filmu`.
 - Pomocí smyčky projdi všechny filmy v poli `filmy`.
