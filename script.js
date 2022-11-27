@@ -13,6 +13,11 @@ const filmy = [
 		popis:
 			'Děj snímku Her se odehrává v Los Angeles v nedaleké budoucnosti. Theodore (Joaquin Phoenix) je komplikovaný a citlivý muž, který se živí psaním dojemných a osobních dopisů pro druhé. Se zlomeným srdcem po ukončení dlouhého vztahu se začne zajímat o nový, pokročilý operační systém, o kterém jeho výrobce tvrdí, že představuje zcela unikátní a intuitivní bytost. Po jeho instalaci se seznamuje se „Samanthou", umělou inteligencí s milým ženským hlasem (Scarlett Johansson), která má zajímavé postřehy, je citlivá a překvapivě vtipná. Jak její potřeby a požadavky rostou společně s těmi jeho, mění se jejich přátelství ve skutečnou vzájemnou lásku. (csfd.cz, Falcon)',
 		premiera: '2013-12-18',
+		video: {
+			url: 'https://user-images.githubusercontent.com/1045362/204137892-c6aee4cd-8cc1-44db-b076-71774d67c7b3.mp4',
+			sirka: '320',
+			vyska: '180',
+		},
 	},
 	{
 		id: 'vlastnici',
@@ -26,6 +31,11 @@ const filmy = [
 		popis:
 			'Paní Zahrádková (Tereza Voříšková) s manželem (Vojta Kotek) idealisticky chtějí, aby společnými silami dům zachránili. Novomanželé Bernáškovi (Jiří Černý, Maria Sawa) se s nadšením připojují. Paní Roubíčková (Klára Melíšková) pedantsky kontroluje řádný průběh schůze. Paní Horvátová (Dagmar Havlová) všechno iniciativně komentuje. Naivní pan Švec (David Novotný) zastupuje svojí maminku. Paní Procházková (Pavla Tomicová) s panem Novákem (Ondřej Malý) hledá způsoby jak zhodnotit svůj majetek. Pan Nitranský (Andrej Polák) touží po půdě v domě a pan Kubát (Jiří Lábus) důsledně sabotuje jakékoliv rozhodnutí. A v pozadí číhají bratři Čermákovi (Kryštof Hádek, Stanislav Majer), jen starý pan profesor Sokol (Ladislav Trojan) zatím nic nekomentuje… (csfd.cz, CinemArt)',
 		premiera: '2019-11-19',
+		video: {
+			url: 'https://user-images.githubusercontent.com/1045362/204137892-c6aee4cd-8cc1-44db-b076-71774d67c7b3.mp4',
+			sirka: '320',
+			vyska: '180',
+		},
 	},
 ]
 
@@ -142,6 +152,20 @@ if (detailFilmuElement) {
 	plakat.src = film.plakat.url
 	plakat.width = film.plakat.sirka
 	plakat.height = film.plakat.vyska
+
+	/*
+	Úkol
+	@TODO: video přehrávač
+	*/
+	const prehravacElement = document.querySelector('#prehravac')
+	const videoElement = prehravacElement.querySelector('video')
+	videoElement.width = film.video.sirka
+	videoElement.height = film.video.vyska
+	videoElement.innerHTML = `<source src="${film.video.url}" type="video/mp4" />`
+	prehravacElement.addEventListener('click', () => {
+		videoElement.play() // @TODO
+	})
+	/* ---- */
 
 	const premieraElm = document.querySelector('#premiera')
 	const premiera = dayjs(film.premiera)
