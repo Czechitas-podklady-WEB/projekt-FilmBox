@@ -199,3 +199,37 @@ if (detailFilmuElement) {
 		)}</strong>, což bude za ${premiera.diff(dnes, 'days')} ${dnyRetezec}.`
 	}
 }
+
+
+const hvezdy = document.querySelectorAll(".fa-star")
+let ohvezdickovano = 0
+
+const mouseEnter = (e) => {
+	for (let index = 0; index < hvezdy.length; index++) {
+		const hvezda = hvezdy[index];
+		hvezda.classList.remove("far")
+		hvezda.classList.add("fas")
+			if (hvezda.id === e.target.id) break
+	}
+}
+
+const mouseLeave = () => {
+		for (let index = 0; index < hvezdy.length; index++) {
+			const hvezda = hvezdy[index];
+			if (ohvezdickovano <= index) {
+				hvezda.classList.remove("fas")
+				hvezda.classList.add("far")
+			}
+		}
+}
+
+const mouseClick = (e) => {
+	ohvezdickovano = Number(e.target.id)
+}
+
+hvezdy.forEach((hvezda) => {
+	hvezda.addEventListener("pointerenter", mouseEnter)
+	hvezda.addEventListener("pointerleave", mouseLeave)
+	hvezda.addEventListener("click", mouseClick)
+})
+
