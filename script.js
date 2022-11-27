@@ -65,7 +65,7 @@ menuTlacitkoElement.addEventListener('click', () => {
 
 /*
 Úkol
-Vypiš na úvodní stránce filmy z javascriptového pole.
+Vypiš na stránce seznamu filmy z javascriptového pole.
 - Vyhledej na stránce prvek s id `seznam-filmu`.
 - Pomocí smyčky projdi všechny filmy v poli `filmy`.
 - Pomocí interpolace řetězců slož HTML pro každý film do následujícího formátu. Na patřičná místa dosaď vlastnosti `nazev`, `ochutnavka` a `plakat`.
@@ -92,7 +92,7 @@ Vypiš na úvodní stránce filmy z javascriptového pole.
 	</div>
 	```
 - Vzhledem k tomu, že `script.js` se používá i na podstránkách bez seznamu filmů, bez prvku `#seznam-filmu`, může se stát, že tvůj kód bude zobrazovat chybu ve vývojářských nástrojích například na detailu `film.html`. Obal tvůj kód tedy podmínkou, ať se pouští pouze v případě, že se v HTML aktuální stránky `#seznam-filmu` nachází.
-- Ukázkové filmy vepsané přímo do souboru `index.html` umažte. Nejsou potřeba, když se teď o výpis stará JavaScript.
+- Ukázkové filmy vepsané přímo do souboru `seznam.html` umažte. Nejsou potřeba, když se teď o výpis stará JavaScript.
 */
 const seznamFilmuElement = document.querySelector('#seznam-filmu')
 if (seznamFilmuElement) {
@@ -200,27 +200,26 @@ if (detailFilmuElement) {
 	}
 }
 
-
-const hvezdy = document.querySelectorAll(".fa-star")
+const hvezdy = document.querySelectorAll('.fa-star')
 let ohvezdickovano = 0
 
 const hvezdaMouseEnter = (e) => {
 	for (let index = 0; index < hvezdy.length; index++) {
-		const hvezda = hvezdy[index];
-		hvezda.classList.remove("far")
-		hvezda.classList.add("fas")
-			if (hvezda.id === e.target.id) break
+		const hvezda = hvezdy[index]
+		hvezda.classList.remove('far')
+		hvezda.classList.add('fas')
+		if (hvezda.id === e.target.id) break
 	}
 }
 
 const hvezdaMouseLeave = () => {
-		for (let index = 0; index < hvezdy.length; index++) {
-			const hvezda = hvezdy[index];
-			if (ohvezdickovano <= index) {
-				hvezda.classList.remove("fas")
-				hvezda.classList.add("far")
-			}
+	for (let index = 0; index < hvezdy.length; index++) {
+		const hvezda = hvezdy[index]
+		if (ohvezdickovano <= index) {
+			hvezda.classList.remove('fas')
+			hvezda.classList.add('far')
 		}
+	}
 }
 
 const hvezdaMouseClick = (e) => {
@@ -228,8 +227,7 @@ const hvezdaMouseClick = (e) => {
 }
 
 hvezdy.forEach((hvezda) => {
-	hvezda.addEventListener("pointerenter", hvezdaMouseEnter)
-	hvezda.addEventListener("pointerleave", hvezdaMouseLeave)
-	hvezda.addEventListener("click", hvezdaMouseClick)
+	hvezda.addEventListener('pointerenter', hvezdaMouseEnter)
+	hvezda.addEventListener('pointerleave', hvezdaMouseLeave)
+	hvezda.addEventListener('click', hvezdaMouseClick)
 })
-
