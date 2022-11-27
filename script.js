@@ -203,31 +203,34 @@ if (detailFilmuElement) {
 const hvezdy = document.querySelectorAll('.fa-star')
 let ohvezdickovano = 0
 
-const hvezdaMouseEnter = (e) => {
+const nastavHodnoceni = (pocetHvezd) => {
 	for (let index = 0; index < hvezdy.length; index++) {
 		const hvezda = hvezdy[index]
-		hvezda.classList.remove('far')
-		hvezda.classList.add('fas')
-		if (hvezda.id === e.target.id) break
-	}
-}
-
-const hvezdaMouseLeave = () => {
-	for (let index = 0; index < hvezdy.length; index++) {
-		const hvezda = hvezdy[index]
-		if (ohvezdickovano <= index) {
+		if (index < pocetHvezd) {
+			hvezda.classList.remove('far')
+			hvezda.classList.add('fas')
+		} else {
 			hvezda.classList.remove('fas')
 			hvezda.classList.add('far')
 		}
 	}
 }
 
-const hvezdaMouseClick = (e) => {
-	ohvezdickovano = Number(e.target.id)
+const hvezdaMouseEnter = (event) => {
+	nastavHodnoceni(Number(event.target.textContent))
+}
+
+const hvezdaMouseLeave = () => {
+	nastavHodnoceni(ohvezdickovano)
+}
+
+const hvezdaMouseClick = (event) => {
+	ohvezdickovano = Number(event.target.textContent)
+	nastavHodnoceni(ohvezdickovano)
 }
 
 hvezdy.forEach((hvezda) => {
-	hvezda.addEventListener('pointerenter', hvezdaMouseEnter)
-	hvezda.addEventListener('pointerleave', hvezdaMouseLeave)
+	hvezda.addEventListener('mouseenter', hvezdaMouseEnter)
+	hvezda.addEventListener('mouseleave', hvezdaMouseLeave)
 	hvezda.addEventListener('click', hvezdaMouseClick)
 })
