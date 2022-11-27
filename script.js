@@ -12,7 +12,7 @@ const filmy = [
 		ochutnavka: 'Romantické Sci-Fi z blízké budoucnosti',
 		popis:
 			'Děj snímku Her se odehrává v Los Angeles v nedaleké budoucnosti. Theodore (Joaquin Phoenix) je komplikovaný a citlivý muž, který se živí psaním dojemných a osobních dopisů pro druhé. Se zlomeným srdcem po ukončení dlouhého vztahu se začne zajímat o nový, pokročilý operační systém, o kterém jeho výrobce tvrdí, že představuje zcela unikátní a intuitivní bytost. Po jeho instalaci se seznamuje se „Samanthou", umělou inteligencí s milým ženským hlasem (Scarlett Johansson), která má zajímavé postřehy, je citlivá a překvapivě vtipná. Jak její potřeby a požadavky rostou společně s těmi jeho, mění se jejich přátelství ve skutečnou vzájemnou lásku. (csfd.cz, Falcon)',
-		premiera: '18. 12. 2013',
+		premiera: '2013-12-18',
 	},
 	{
 		id: 'vlastnici',
@@ -25,7 +25,7 @@ const filmy = [
 		ochutnavka: 'Česká komedie.',
 		popis:
 			'Paní Zahrádková (Tereza Voříšková) s manželem (Vojta Kotek) idealisticky chtějí, aby společnými silami dům zachránili. Novomanželé Bernáškovi (Jiří Černý, Maria Sawa) se s nadšením připojují. Paní Roubíčková (Klára Melíšková) pedantsky kontroluje řádný průběh schůze. Paní Horvátová (Dagmar Havlová) všechno iniciativně komentuje. Naivní pan Švec (David Novotný) zastupuje svojí maminku. Paní Procházková (Pavla Tomicová) s panem Novákem (Ondřej Malý) hledá způsoby jak zhodnotit svůj majetek. Pan Nitranský (Andrej Polák) touží po půdě v domě a pan Kubát (Jiří Lábus) důsledně sabotuje jakékoliv rozhodnutí. A v pozadí číhají bratři Čermákovi (Kryštof Hádek, Stanislav Majer), jen starý pan profesor Sokol (Ladislav Trojan) zatím nic nekomentuje… (csfd.cz, CinemArt)',
-		premiera: '19. 11. 2019',
+		premiera: '2019-11-19',
 	},
 ]
 
@@ -121,9 +121,10 @@ Na stránce s detailem filmu zobraz příslušné informace.
 
 Ukol
 Pomocí dayjs spočítejte, za kolik dní bude premiéra nebo jak je to od premiéry dávno.
-... @TODO: dayjs("18. 12. 2013", "D. M. YYYY")
-... do filmy.html přidat dayjs z CDN?
-... Možná měsíc 12 napsat jako prosince?
+- Do filmy.html přidej dayjs z CDN <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+- Spočítej rozdíl ve dnech mezi dneškem a datumem premiéry pomocí metody diff().
+- Do elementu s id #premiera věpiš, kdy byla/bude premiéra a před kolika dny nebo za kolik dní bude nebo jestli je dnes.
+- BONUS: Zařiď, aby slovo tvar slova den byl ve správném tvaru, aby se třeba nestalo "což bylo před 1 dní"
 */
 
 const detailFilmuElement = document.querySelector('#detail-filmu')
@@ -141,4 +142,31 @@ if (detailFilmuElement) {
 	plakat.src = film.plakat.url
 	plakat.width = film.plakat.sirka
 	plakat.height = film.plakat.vyska
+
+	const premieraElm = document.querySelector('#premiera')
+    const premiera = dayjs(film.premiera)
+    const dnes = dayjs()
+    const rozdilDnu = premiera.diff(dnes, 'days')
+    let dnyRetezec
+
+    if (rozdilDnu === 0) {
+        premieraElm.innerHTML = `Premiéra <strong>${premiera.format("D. M. YYYY")}</strong>, což je dnes.`
+    } else if (dnes.isAfter(premiera)) {
+        if (rozdilDnu === -1) {
+            dnyRetezec = "dnem"
+        } else {
+            dnyRetezec = "dny"
+        }
+        premieraElm.innerHTML = `Premiéra <strong>${premiera.format("D. M. YYYY")}</strong>, což bylo před ${-premiera.diff(dnes, 'days')} ${dnyRetezec}.`
+    } else {
+        if (rozdilDnu === 1) {
+            dnyRetezec = "dnem"
+        } else if (rozdilDnu === 2 || rozdilDnu === 3 || rozdilDnu === 4) {
+            dnyRetezec = "dny"
+        } else {
+            dnyRetezec = "dní"
+        }
+        premieraElm.innerHTML = `Premiéra <strong>${premiera.format("D. M. YYYY")}</strong>, což bude za ${premiera.diff(dnes, 'days')} ${dnyRetezec}.`
+    }
+
 }
