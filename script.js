@@ -341,14 +341,14 @@ if (detailFilmuElement) {
 	})
 	/* ---- */
 
-	const premieraElm = document.querySelector('#premiera')
+	const premieraElement = document.querySelector('#premiera')
 	const premiera = dayjs(film.premiera)
 	const dnes = dayjs()
 	const rozdilDnu = premiera.diff(dnes, 'days')
 	let dnyRetezec
 
 	if (rozdilDnu === 0) {
-		premieraElm.innerHTML = `Premiéra <strong>${premiera.format(
+		premieraElement.innerHTML = `Premiéra <strong>${premiera.format(
 			'D. M. YYYY',
 		)}</strong>, což je dnes.`
 	} else if (dnes.isAfter(premiera)) {
@@ -357,7 +357,7 @@ if (detailFilmuElement) {
 		} else {
 			dnyRetezec = 'dny'
 		}
-		premieraElm.innerHTML = `Premiéra <strong>${premiera.format(
+		premieraElement.innerHTML = `Premiéra <strong>${premiera.format(
 			'D. M. YYYY',
 		)}</strong>, což bylo před ${-premiera.diff(dnes, 'days')} ${dnyRetezec}.`
 	} else {
@@ -368,7 +368,7 @@ if (detailFilmuElement) {
 		} else {
 			dnyRetezec = 'dní'
 		}
-		premieraElm.innerHTML = `Premiéra <strong>${premiera.format(
+		premieraElement.innerHTML = `Premiéra <strong>${premiera.format(
 			'D. M. YYYY',
 		)}</strong>, což bude za ${premiera.diff(dnes, 'days')} ${dnyRetezec}.`
 	}
