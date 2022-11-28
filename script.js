@@ -188,6 +188,17 @@ if (detailFilmuElement) {
 			.padStart(2, '0')
 		currentTimeElement.textContent = `${minutes}:${seconds}`
 	})
+	document.addEventListener('keydown', (event) => {
+		if (event.code === 'Space') {
+			event.preventDefault()
+			// @TODO: neovlivňovat formuláře
+			if (prehravacElement.classList.contains('playing')) {
+				videoElement.pause()
+			} else {
+				videoElement.play()
+			}
+		}
+	})
 	/* ---- */
 
 	const premieraElm = document.querySelector('#premiera')
