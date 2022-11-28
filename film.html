@@ -16,7 +16,7 @@
 			href="mdb5-standard-UI-kit-free-6.0.1/css/mdb.min.css"
 			rel="stylesheet"
 		/>
-		<script src="mdb5-standard-UI-kit-free-6.0.1/js/mdb.min.js"></script>
+		<script src="mdb5-standard-UI-kit-free-6.0.1/js/mdb.min.js" defer></script>
 		<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 		<link rel="stylesheet" href="styly.css" />
 		<script src="script.js" type="module"></script>
@@ -108,6 +108,37 @@
 					<time class="current-time">00:00</time>
 				</div>
 			</div>
+		</div>
+
+		<!-- Komentáře -->
+		<div class="container-lg mt-5">
+			<h2>Komentáře</h2>
+			<h4>Přidat nový</h4>
+			<form id="comment-form">
+				<div class="form-outline mb-4">
+					<input type="text" id="name-input" class="form-control" />
+					<label class="form-label" for="name-input">Vaše jméno</label>
+				</div>
+				<div class="form-outline mb-4">
+					<textarea class="form-control" id="message-input" rows="4"></textarea>
+					<label class="form-label" for="message-input">Komentář</label>
+				</div>
+				<div class="form-check d-flex justify-content-center mb-4">
+					<input
+						class="form-check-input me-2"
+						type="checkbox"
+						value=""
+						id="terms-checkbox"
+						checked
+					/>
+					<label class="form-check-label" for="terms-checkbox">
+						Souhlasím s podmínkami a zpracováním osobních údajů.
+					</label>
+				</div>
+				<button type="submit" class="btn btn-primary btn-block mb-4">
+					Uložit
+				</button>
+			</form>
 		</div>
 	</body>
 </html>

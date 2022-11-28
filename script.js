@@ -191,7 +191,11 @@ if (detailFilmuElement) {
 		currentTimeElement.textContent = `${minutes}:${seconds}`
 	})
 	document.addEventListener('keydown', (event) => {
-		if (event.code === 'Space') {
+		if (
+			event.code === 'Space' &&
+			event.target.tagName !== 'INPUT' &&
+			event.target.tagName !== 'TEXTAREA'
+		) {
 			event.preventDefault()
 			// @TODO: neovlivňovat formuláře
 			if (prehravacElement.classList.contains('playing')) {
@@ -282,4 +286,15 @@ hvezdy.forEach((hvezda) => {
 	hvezda.addEventListener('mouseenter', hvezdaMouseEnter)
 	hvezda.addEventListener('mouseleave', hvezdaMouseLeave)
 	hvezda.addEventListener('click', hvezdaMouseClick)
+})
+
+/*
+Úkol
+Oživ formulář pro přidání komentáře.
+@TODO
+*/
+const formularNaKomentarElement = document.querySelector('#comment-form')
+formularNaKomentarElement.addEventListener('submit', (event) => {
+	event.preventDefault()
+	// @TODO
 })
