@@ -54,7 +54,7 @@
 		<div class="container-lg mt-5">
 			<div class="card mb-3" id="detail-filmu">
 				<div class="row g-0">
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<img
 							src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
 							alt="plakát"
@@ -63,7 +63,7 @@
 							height="612"
 						/>
 					</div>
-					<div class="col-md-8">
+					<div class="col-md-7">
 						<div class="card-body">
 							<h5 class="card-title">Card title</h5>
 							<p class="card-text">
@@ -115,6 +115,41 @@
 									5
 								</button>
 							</div>
+
+							<!-- Komentáře -->
+							<h6 class="mt-4">Poznámka</h6>
+							<form id="note-form">
+								<div class="row">
+									<div class="col-md-6 col-lg-7 col-xl-8 mb-2">
+										<div class="form-outline">
+											<textarea
+												class="form-control"
+												id="message-input"
+												rows="4"
+											></textarea>
+											<label class="form-label" for="message-input"
+												>Text poznámky</label
+											>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-5 col-xl-4">
+										<div class="form-check d-flex justify-content-center mb-2">
+											<input
+												class="form-check-input me-2 mb-2"
+												type="checkbox"
+												value=""
+												id="terms-checkbox"
+											/>
+											<label class="form-check-label" for="terms-checkbox">
+												Souhlasím se všeobecnými podmínky užívání.
+											</label>
+										</div>
+										<button type="submit" class="btn btn-primary btn-block">
+											Uložit
+										</button>
+									</div>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -131,37 +166,6 @@
 					<time class="current-time">00:00</time>
 				</div>
 			</div>
-		</div>
-
-		<!-- Komentáře -->
-		<div class="container-lg mt-5">
-			<h2>Komentáře</h2>
-			<h4>Přidat nový</h4>
-			<form id="comment-form">
-				<div class="form-outline mb-4">
-					<input type="text" id="name-input" class="form-control" />
-					<label class="form-label" for="name-input">Vaše jméno</label>
-				</div>
-				<div class="form-outline mb-4">
-					<textarea class="form-control" id="message-input" rows="4"></textarea>
-					<label class="form-label" for="message-input">Komentář</label>
-				</div>
-				<div class="form-check d-flex justify-content-center mb-4">
-					<input
-						class="form-check-input me-2"
-						type="checkbox"
-						value=""
-						id="terms-checkbox"
-						checked
-					/>
-					<label class="form-check-label" for="terms-checkbox">
-						Souhlasím s podmínkami a zpracováním osobních údajů.
-					</label>
-				</div>
-				<button type="submit" class="btn btn-primary btn-block mb-4">
-					Uložit
-				</button>
-			</form>
 		</div>
 	</body>
 </html>

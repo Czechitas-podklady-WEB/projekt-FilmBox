@@ -193,11 +193,11 @@ if (detailFilmuElement) {
 	document.addEventListener('keydown', (event) => {
 		if (
 			event.code === 'Space' &&
+			event.target.tagName !== 'TEXTAREA' &&
 			event.target.tagName !== 'INPUT' &&
-			event.target.tagName !== 'TEXTAREA'
+			event.target.tagName !== 'BUTTON'
 		) {
 			event.preventDefault()
-			// @TODO: neovlivňovat formuláře
 			if (prehravacElement.classList.contains('playing')) {
 				videoElement.pause()
 			} else {
@@ -290,13 +290,27 @@ hvezdy.forEach((hvezda) => {
 
 /*
 Úkol
-Oživ formulář pro přidání komentáře.
+Oživ formulář pro přidání poznámky.
 @TODO
 */
-const formularNaKomentarElement = document.querySelector('#comment-form')
-if (formularNaKomentarElement) {
-	formularNaKomentarElement.addEventListener('submit', (event) => {
+const formularNaPoznamkuElement = document.querySelector('#note-form')
+if (formularNaPoznamkuElement) {
+	formularNaPoznamkuElement.addEventListener('submit', (event) => {
 		event.preventDefault()
-		// @TODO
+		const textovePoleElement =
+			formularNaPoznamkuElement.querySelector('#message-input')
+		if (textovePoleElement.value.length === 0) {
+			textovePoleElement.classList.add('is-invalid')
+			textovePoleElement.focus()
+			return
+		}
+		const podminkyElement =
+			formularNaPoznamkuElement.querySelector('#terms-checkbox')
+		if (podminkyElement.checked === false) {
+			podminkyElement.classList.add('is-invalid')
+			podminkyElement.focus()
+			return
+		}
+		formularNaPoznamkuElement.innerHTML = `<p class="card-text">${textovePoleElement.value}</p>`
 	})
 }
