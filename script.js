@@ -15,6 +15,8 @@ const filmy = [
 		premiera: '2013-12-18',
 		video: {
 			url: 'https://user-images.githubusercontent.com/1045362/204137892-c6aee4cd-8cc1-44db-b076-71774d67c7b3.mp4',
+			posterUrl:
+				'https://user-images.githubusercontent.com/1045362/204167262-a16c4755-3d23-400e-b6b0-c9c242399ecf.jpg',
 			sirka: '320',
 			vyska: '180',
 		},
@@ -33,6 +35,8 @@ const filmy = [
 		premiera: '2019-11-19',
 		video: {
 			url: 'https://user-images.githubusercontent.com/1045362/204137892-c6aee4cd-8cc1-44db-b076-71774d67c7b3.mp4',
+			posterUrl:
+				'https://user-images.githubusercontent.com/1045362/204167262-a16c4755-3d23-400e-b6b0-c9c242399ecf.jpg',
 			sirka: '320',
 			vyska: '180',
 		},
@@ -159,11 +163,30 @@ if (detailFilmuElement) {
 	*/
 	const prehravacElement = document.querySelector('#prehravac')
 	const videoElement = prehravacElement.querySelector('video')
+	const currentTimeElement = prehravacElement.querySelector('.current-time')
 	videoElement.width = film.video.sirka
 	videoElement.height = film.video.vyska
 	videoElement.innerHTML = `<source src="${film.video.url}" type="video/mp4" />`
-	prehravacElement.addEventListener('click', () => {
-		videoElement.play() // @TODO
+	videoElement.poster = film.video.posterUrl
+	prehravacElement.querySelector('.play').addEventListener('click', () => {
+		videoElement.play()
+	})
+	prehravacElement.querySelector('.pause').addEventListener('click', () => {
+		videoElement.pause()
+	})
+	videoElement.addEventListener('playing', () => {
+		prehravacElement.classList.add('playing')
+	})
+	videoElement.addEventListener('pause', () => {
+		prehravacElement.classList.remove('playing')
+	})
+	videoElement.addEventListener('timeupdate', () => {
+		const totalSeconds = Math.round(videoElement.currentTime)
+		const seconds = (totalSeconds % 60).toString().padStart(2, '0')
+		const minutes = Math.floor(totalSeconds / 60)
+			.toString()
+			.padStart(2, '0')
+		currentTimeElement.textContent = `${minutes}:${seconds}`
 	})
 	/* ---- */
 
