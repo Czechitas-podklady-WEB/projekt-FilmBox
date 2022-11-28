@@ -268,17 +268,16 @@ if (detailFilmuElement) {
 	})
 
 	const zobrazitOvladaciPanel = () => {
+		clearTimeout(odpocet)
+		odpocet = setTimeout(skrytOvladaciPanel, 3000)
 		ovladaciPanelElement.classList.remove('hidden')
 	}
 	const skrytOvladaciPanel = () => {
 		ovladaciPanelElement.classList.add('hidden')
 	}
 	let odpocet
-	document.addEventListener('mousemove', () => {
-		clearTimeout(odpocet)
-		odpocet = setTimeout(skrytOvladaciPanel, 3000)
-		zobrazitOvladaciPanel()
-	})
+	document.addEventListener('mousemove', zobrazitOvladaciPanel)
+	document.addEventListener('keydown', zobrazitOvladaciPanel)
 	/* ---- */
 
 	const premieraElement = document.querySelector('#premiera')
