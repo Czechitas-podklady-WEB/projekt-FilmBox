@@ -5,6 +5,10 @@ body {
 
 .landing-page {
 	background-color: black;
+	display: grid;
+	grid-template-rows: auto 1fr;
+	min-height: 100vh;
+	padding-bottom: 0;
 }
 
 img {
@@ -17,13 +21,9 @@ video {
 }
 
 .intro {
-	height: 400px;
+	min-height: 25rem;
 	background-image: url('intro.jpg');
-}
-@media (min-width: 992px) {
-	.intro {
-		height: 600px;
-	}
+	background-size: cover;
 }
 
 .stars {
