@@ -294,7 +294,9 @@ Oživ formulář pro přidání komentáře.
 @TODO
 */
 const formularNaKomentarElement = document.querySelector('#comment-form')
-formularNaKomentarElement.addEventListener('submit', (event) => {
-	event.preventDefault()
-	// @TODO
-})
+if (formularNaKomentarElement) {
+	formularNaKomentarElement.addEventListener('submit', (event) => {
+		event.preventDefault()
+		// @TODO
+	})
+}
