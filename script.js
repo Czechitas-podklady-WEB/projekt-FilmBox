@@ -162,6 +162,8 @@ if (detailFilmuElement) {
 	@TODO: video přehrávač
 	*/
 	const prehravacElement = document.querySelector('#prehravac')
+	const ovladaciPanelElement =
+		prehravacElement.querySelector('.player-controls')
 	const videoElement = prehravacElement.querySelector('video')
 	const currentTimeElement = prehravacElement.querySelector('.current-time')
 	videoElement.width = film.video.sirka
@@ -198,6 +200,19 @@ if (detailFilmuElement) {
 				videoElement.play()
 			}
 		}
+	})
+
+	const zobrazitOvladaciPanel = () => {
+		ovladaciPanelElement.classList.remove('hidden')
+	}
+	const skrytOvladaciPanel = () => {
+		ovladaciPanelElement.classList.add('hidden')
+	}
+	let odpocet
+	document.addEventListener('mousemove', () => {
+		clearTimeout(odpocet)
+		odpocet = setTimeout(skrytOvladaciPanel, 3000)
+		zobrazitOvladaciPanel()
 	})
 	/* ---- */
 
