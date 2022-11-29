@@ -195,3 +195,25 @@ hvezdy.forEach((hvezda) => {
 	hvezda.addEventListener('mouseleave', hvezdaMouseLeave)
 	hvezda.addEventListener('click', hvezdaMouseClick)
 })
+
+const formularNaPoznamkuElement = document.querySelector('#note-form')
+if (formularNaPoznamkuElement) {
+	formularNaPoznamkuElement.addEventListener('submit', (event) => {
+		event.preventDefault()
+		const textovePoleElement =
+			formularNaPoznamkuElement.querySelector('#message-input')
+		if (textovePoleElement.value.length === 0) {
+			textovePoleElement.classList.add('is-invalid')
+			textovePoleElement.focus()
+			return
+		}
+		const podminkyElement =
+			formularNaPoznamkuElement.querySelector('#terms-checkbox')
+		if (podminkyElement.checked === false) {
+			podminkyElement.classList.add('is-invalid')
+			podminkyElement.focus()
+			return
+		}
+		formularNaPoznamkuElement.innerHTML = `<p class="card-text">${textovePoleElement.value}</p>`
+	})
+}
