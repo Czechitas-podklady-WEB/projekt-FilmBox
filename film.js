@@ -159,6 +159,38 @@ if (detailFilmuElement) {
 	plakat.src = film.plakat.url
 	plakat.width = film.plakat.sirka
 	plakat.height = film.plakat.vyska
+
+	const premieraElement = document.querySelector('#premiera')
+	const premiera = dayjs(film.premiera)
+	const dnes = dayjs()
+	const rozdilDnu = premiera.diff(dnes, 'days')
+	let dnyRetezec
+
+	if (rozdilDnu === 0) {
+		premieraElement.innerHTML = `Premiéra <strong>${premiera.format(
+			'D. M. YYYY',
+		)}</strong>, což je dnes.`
+	} else if (dnes.isAfter(premiera)) {
+		if (rozdilDnu === -1) {
+			dnyRetezec = 'dnem'
+		} else {
+			dnyRetezec = 'dny'
+		}
+		premieraElement.innerHTML = `Premiéra <strong>${premiera.format(
+			'D. M. YYYY',
+		)}</strong>, což bylo před ${-premiera.diff(dnes, 'days')} ${dnyRetezec}.`
+	} else {
+		if (rozdilDnu === 1) {
+			dnyRetezec = 'dnem'
+		} else if (rozdilDnu === 2 || rozdilDnu === 3 || rozdilDnu === 4) {
+			dnyRetezec = 'dny'
+		} else {
+			dnyRetezec = 'dní'
+		}
+		premieraElement.innerHTML = `Premiéra <strong>${premiera.format(
+			'D. M. YYYY',
+		)}</strong>, což bude za ${premiera.diff(dnes, 'days')} ${dnyRetezec}.`
+	}
 }
 
 const hvezdy = document.querySelectorAll('.fa-star')
