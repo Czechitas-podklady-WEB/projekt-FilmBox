@@ -191,6 +191,59 @@ if (detailFilmuElement) {
 			'D. M. YYYY',
 		)}</strong>, což bude za ${premiera.diff(dnes, 'days')} ${dnyRetezec}.`
 	}
+
+	const prehravacElement = document.querySelector('#prehravac')
+	const ovladaciPanelElement =
+		prehravacElement.querySelector('.player-controls')
+	const videoElement = prehravacElement.querySelector('video')
+	const currentTimeElement = prehravacElement.querySelector('.current-time')
+	prehravacElement.querySelector('.play').addEventListener('click', () => {
+		videoElement.play()
+	})
+	prehravacElement.querySelector('.pause').addEventListener('click', () => {
+		videoElement.pause()
+	})
+	videoElement.addEventListener('playing', () => {
+		prehravacElement.classList.add('playing')
+	})
+	videoElement.addEventListener('pause', () => {
+		prehravacElement.classList.remove('playing')
+	})
+	videoElement.addEventListener('timeupdate', () => {
+		const totalSeconds = Math.round(videoElement.currentTime)
+		const seconds = (totalSeconds % 60).toString().padStart(2, '0')
+		const minutes = Math.floor(totalSeconds / 60)
+			.toString()
+			.padStart(2, '0')
+		currentTimeElement.textContent = `${minutes}:${seconds}`
+	})
+	document.addEventListener('keydown', (event) => {
+		if (
+			event.code === 'Space' &&
+			event.target.tagName !== 'TEXTAREA' &&
+			event.target.tagName !== 'INPUT' &&
+			event.target.tagName !== 'BUTTON'
+		) {
+			event.preventDefault()
+			if (prehravacElement.classList.contains('playing')) {
+				videoElement.pause()
+			} else {
+				videoElement.play()
+			}
+		}
+	})
+
+	const zobrazitOvladaciPanel = () => {
+		clearTimeout(odpocet)
+		odpocet = setTimeout(skrytOvladaciPanel, 3000)
+		ovladaciPanelElement.classList.remove('hidden')
+	}
+	const skrytOvladaciPanel = () => {
+		ovladaciPanelElement.classList.add('hidden')
+	}
+	let odpocet
+	document.addEventListener('mousemove', zobrazitOvladaciPanel)
+	document.addEventListener('keydown', zobrazitOvladaciPanel)
 }
 
 const hvezdy = document.querySelectorAll('.fa-star')
