@@ -136,10 +136,27 @@ if (seznamFilmuElement) {
 						<p class="card-text">
 						${film.ochutnavka}
 						</p>
-						<a href="film.html" class="btn btn-primary">Přehrát</a>
+						<a href="film.html#${film.id}" class="btn btn-primary">Přehrát</a>
 					</div>
 				</div>
 			</div>
 		`
 	})
+}
+
+const detailFilmuElement = document.querySelector('#detail-filmu')
+if (detailFilmuElement) {
+	const idFilmu = location.hash.substring(1)
+	let film
+	filmy.forEach((porovnavanyFilm) => {
+		if (porovnavanyFilm.id === idFilmu) {
+			film = porovnavanyFilm
+		}
+	})
+	detailFilmuElement.querySelector('.card-title').textContent = film.nazev
+	detailFilmuElement.querySelector('.card-text').textContent = film.popis
+	const plakat = detailFilmuElement.querySelector('.img-fluid')
+	plakat.src = film.plakat.url
+	plakat.width = film.plakat.sirka
+	plakat.height = film.plakat.vyska
 }
