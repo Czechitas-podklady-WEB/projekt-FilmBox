@@ -160,3 +160,38 @@ if (detailFilmuElement) {
 	plakat.width = film.plakat.sirka
 	plakat.height = film.plakat.vyska
 }
+
+const hvezdy = document.querySelectorAll('.fa-star')
+let ohvezdickovano = 0
+
+const nastavHodnoceni = (pocetHvezd) => {
+	for (let index = 0; index < hvezdy.length; index++) {
+		const hvezda = hvezdy[index]
+		if (index < pocetHvezd) {
+			hvezda.classList.remove('far')
+			hvezda.classList.add('fas')
+		} else {
+			hvezda.classList.remove('fas')
+			hvezda.classList.add('far')
+		}
+	}
+}
+
+const hvezdaMouseEnter = (event) => {
+	nastavHodnoceni(Number(event.target.textContent))
+}
+
+const hvezdaMouseLeave = () => {
+	nastavHodnoceni(ohvezdickovano)
+}
+
+const hvezdaMouseClick = (event) => {
+	ohvezdickovano = Number(event.target.textContent)
+	nastavHodnoceni(ohvezdickovano)
+}
+
+hvezdy.forEach((hvezda) => {
+	hvezda.addEventListener('mouseenter', hvezdaMouseEnter)
+	hvezda.addEventListener('mouseleave', hvezdaMouseLeave)
+	hvezda.addEventListener('click', hvezdaMouseClick)
+})
