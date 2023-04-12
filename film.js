@@ -250,8 +250,7 @@ const hvezdy = document.querySelectorAll('.fa-star')
 let ohvezdickovano = 0
 
 const nastavHodnoceni = (pocetHvezd) => {
-	for (let index = 0; index < hvezdy.length; index++) {
-		const hvezda = hvezdy[index]
+	hvezdy.forEach((hvezda, index) => {
 		if (index < pocetHvezd) {
 			hvezda.classList.remove('far')
 			hvezda.classList.add('fas')
@@ -259,7 +258,7 @@ const nastavHodnoceni = (pocetHvezd) => {
 			hvezda.classList.remove('fas')
 			hvezda.classList.add('far')
 		}
-	}
+	})
 }
 
 const hvezdaMouseEnter = (event) => {
