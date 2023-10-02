@@ -106,10 +106,9 @@ const filmy = [
 ]
 
 const seznamFilmuElement = document.querySelector('#seznam-filmu')
-if (seznamFilmuElement) {
-	seznamFilmuElement.innerHTML = ''
-	filmy.forEach((film) => {
-		seznamFilmuElement.innerHTML += `
+seznamFilmuElement.innerHTML = ''
+filmy.forEach((film) => {
+	seznamFilmuElement.innerHTML += `
 			<div class="col">
 				<div class="card">
 					<img
@@ -129,5 +128,4 @@ if (seznamFilmuElement) {
 				</div>
 			</div>
 		`
-	})
-}
+})

@@ -106,106 +106,104 @@ const filmy = [
 ]
 
 const detailFilmuElement = document.querySelector('#detail-filmu')
-if (detailFilmuElement) {
-	const idFilmu = location.hash.substring(1)
-	let film
-	filmy.forEach((porovnavanyFilm) => {
-		if (porovnavanyFilm.id === idFilmu) {
-			film = porovnavanyFilm
-		}
-	})
-	detailFilmuElement.querySelector('.card-title').textContent = film.nazev
-	detailFilmuElement.querySelector('.card-text').textContent = film.popis
-	const plakat = detailFilmuElement.querySelector('.img-fluid')
-	plakat.src = film.plakat.url
-	plakat.width = film.plakat.sirka
-	plakat.height = film.plakat.vyska
 
-	const premieraElement = document.querySelector('#premiera')
-	const premiera = dayjs(film.premiera)
-	const dnes = dayjs()
-	const rozdilDnu = premiera.diff(dnes, 'days')
-	let dnyRetezec
+const idFilmu = location.hash.substring(1)
+let film
+filmy.forEach((porovnavanyFilm) => {
+	if (porovnavanyFilm.id === idFilmu) {
+		film = porovnavanyFilm
+	}
+})
+detailFilmuElement.querySelector('.card-title').textContent = film.nazev
+detailFilmuElement.querySelector('.card-text').textContent = film.popis
+const plakat = detailFilmuElement.querySelector('.img-fluid')
+plakat.src = film.plakat.url
+plakat.width = film.plakat.sirka
+plakat.height = film.plakat.vyska
 
-	if (rozdilDnu === 0) {
-		premieraElement.innerHTML = `Premiéra <strong>${premiera.format(
-			'D. M. YYYY',
-		)}</strong>, což je dnes.`
-	} else if (dnes.isAfter(premiera)) {
-		if (rozdilDnu === -1) {
-			dnyRetezec = 'dnem'
-		} else {
-			dnyRetezec = 'dny'
-		}
-		premieraElement.innerHTML = `Premiéra <strong>${premiera.format(
-			'D. M. YYYY',
-		)}</strong>, což bylo před ${-premiera.diff(dnes, 'days')} ${dnyRetezec}.`
+const premieraElement = document.querySelector('#premiera')
+const premiera = dayjs(film.premiera)
+const dnes = dayjs()
+const rozdilDnu = premiera.diff(dnes, 'days')
+let dnyRetezec
+
+if (rozdilDnu === 0) {
+	premieraElement.innerHTML = `Premiéra <strong>${premiera.format(
+		'D. M. YYYY',
+	)}</strong>, což je dnes.`
+} else if (dnes.isAfter(premiera)) {
+	if (rozdilDnu === -1) {
+		dnyRetezec = 'dnem'
 	} else {
-		if (rozdilDnu === 1) {
-			dnyRetezec = 'dnem'
-		} else if (rozdilDnu === 2 || rozdilDnu === 3 || rozdilDnu === 4) {
-			dnyRetezec = 'dny'
-		} else {
-			dnyRetezec = 'dní'
-		}
-		premieraElement.innerHTML = `Premiéra <strong>${premiera.format(
-			'D. M. YYYY',
-		)}</strong>, což bude za ${premiera.diff(dnes, 'days')} ${dnyRetezec}.`
+		dnyRetezec = 'dny'
 	}
-
-	const prehravacElement = document.querySelector('#prehravac')
-	const ovladaciPanelElement =
-		prehravacElement.querySelector('.player-controls')
-	const videoElement = prehravacElement.querySelector('video')
-	const currentTimeElement = prehravacElement.querySelector('.current-time')
-	prehravacElement.querySelector('.play').addEventListener('click', () => {
-		videoElement.play()
-	})
-	prehravacElement.querySelector('.pause').addEventListener('click', () => {
-		videoElement.pause()
-	})
-	videoElement.addEventListener('playing', () => {
-		prehravacElement.classList.add('playing')
-	})
-	videoElement.addEventListener('pause', () => {
-		prehravacElement.classList.remove('playing')
-	})
-	videoElement.addEventListener('timeupdate', () => {
-		const totalSeconds = Math.round(videoElement.currentTime)
-		const seconds = (totalSeconds % 60).toString().padStart(2, '0')
-		const minutes = Math.floor(totalSeconds / 60)
-			.toString()
-			.padStart(2, '0')
-		currentTimeElement.textContent = `${minutes}:${seconds}`
-	})
-	document.addEventListener('keydown', (event) => {
-		if (
-			event.code === 'Space' &&
-			event.target.tagName !== 'TEXTAREA' &&
-			event.target.tagName !== 'INPUT' &&
-			event.target.tagName !== 'BUTTON'
-		) {
-			event.preventDefault()
-			if (prehravacElement.classList.contains('playing')) {
-				videoElement.pause()
-			} else {
-				videoElement.play()
-			}
-		}
-	})
-
-	const zobrazitOvladaciPanel = () => {
-		clearTimeout(odpocet)
-		odpocet = setTimeout(skrytOvladaciPanel, 3000)
-		ovladaciPanelElement.classList.remove('hidden')
+	premieraElement.innerHTML = `Premiéra <strong>${premiera.format(
+		'D. M. YYYY',
+	)}</strong>, což bylo před ${-premiera.diff(dnes, 'days')} ${dnyRetezec}.`
+} else {
+	if (rozdilDnu === 1) {
+		dnyRetezec = 'dnem'
+	} else if (rozdilDnu === 2 || rozdilDnu === 3 || rozdilDnu === 4) {
+		dnyRetezec = 'dny'
+	} else {
+		dnyRetezec = 'dní'
 	}
-	const skrytOvladaciPanel = () => {
-		ovladaciPanelElement.classList.add('hidden')
-	}
-	let odpocet
-	document.addEventListener('mousemove', zobrazitOvladaciPanel)
-	document.addEventListener('keydown', zobrazitOvladaciPanel)
+	premieraElement.innerHTML = `Premiéra <strong>${premiera.format(
+		'D. M. YYYY',
+	)}</strong>, což bude za ${premiera.diff(dnes, 'days')} ${dnyRetezec}.`
 }
+
+const prehravacElement = document.querySelector('#prehravac')
+const ovladaciPanelElement = prehravacElement.querySelector('.player-controls')
+const videoElement = prehravacElement.querySelector('video')
+const currentTimeElement = prehravacElement.querySelector('.current-time')
+prehravacElement.querySelector('.play').addEventListener('click', () => {
+	videoElement.play()
+})
+prehravacElement.querySelector('.pause').addEventListener('click', () => {
+	videoElement.pause()
+})
+videoElement.addEventListener('playing', () => {
+	prehravacElement.classList.add('playing')
+})
+videoElement.addEventListener('pause', () => {
+	prehravacElement.classList.remove('playing')
+})
+videoElement.addEventListener('timeupdate', () => {
+	const totalSeconds = Math.round(videoElement.currentTime)
+	const seconds = (totalSeconds % 60).toString().padStart(2, '0')
+	const minutes = Math.floor(totalSeconds / 60)
+		.toString()
+		.padStart(2, '0')
+	currentTimeElement.textContent = `${minutes}:${seconds}`
+})
+document.addEventListener('keydown', (event) => {
+	if (
+		event.code === 'Space' &&
+		event.target.tagName !== 'TEXTAREA' &&
+		event.target.tagName !== 'INPUT' &&
+		event.target.tagName !== 'BUTTON'
+	) {
+		event.preventDefault()
+		if (prehravacElement.classList.contains('playing')) {
+			videoElement.pause()
+		} else {
+			videoElement.play()
+		}
+	}
+})
+
+const zobrazitOvladaciPanel = () => {
+	clearTimeout(odpocet)
+	odpocet = setTimeout(skrytOvladaciPanel, 3000)
+	ovladaciPanelElement.classList.remove('hidden')
+}
+const skrytOvladaciPanel = () => {
+	ovladaciPanelElement.classList.add('hidden')
+}
+let odpocet
+document.addEventListener('mousemove', zobrazitOvladaciPanel)
+document.addEventListener('keydown', zobrazitOvladaciPanel)
 
 const hvezdy = document.querySelectorAll('.fa-star')
 let ohvezdickovano = 0
@@ -242,23 +240,21 @@ hvezdy.forEach((hvezda) => {
 })
 
 const formularNaPoznamkuElement = document.querySelector('#note-form')
-if (formularNaPoznamkuElement) {
-	formularNaPoznamkuElement.addEventListener('submit', (event) => {
-		event.preventDefault()
-		const textovePoleElement =
-			formularNaPoznamkuElement.querySelector('#message-input')
-		if (textovePoleElement.value.length === 0) {
-			textovePoleElement.classList.add('is-invalid')
-			textovePoleElement.focus()
-			return
-		}
-		const podminkyElement =
-			formularNaPoznamkuElement.querySelector('#terms-checkbox')
-		if (podminkyElement.checked === false) {
-			podminkyElement.classList.add('is-invalid')
-			podminkyElement.focus()
-			return
-		}
-		formularNaPoznamkuElement.innerHTML = `<p class="card-text">${textovePoleElement.value}</p>`
-	})
-}
+formularNaPoznamkuElement.addEventListener('submit', (event) => {
+	event.preventDefault()
+	const textovePoleElement =
+		formularNaPoznamkuElement.querySelector('#message-input')
+	if (textovePoleElement.value.length === 0) {
+		textovePoleElement.classList.add('is-invalid')
+		textovePoleElement.focus()
+		return
+	}
+	const podminkyElement =
+		formularNaPoznamkuElement.querySelector('#terms-checkbox')
+	if (podminkyElement.checked === false) {
+		podminkyElement.classList.add('is-invalid')
+		podminkyElement.focus()
+		return
+	}
+	formularNaPoznamkuElement.innerHTML = `<p class="card-text">${textovePoleElement.value}</p>`
+})
