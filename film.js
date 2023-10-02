@@ -105,45 +105,6 @@ const filmy = [
 	},
 ]
 
-const menuTlacitkoElement = document.querySelector('#menu-tlacitko')
-const menuPolozkyElement = document.querySelector('#menu-polozky')
-menuTlacitkoElement.addEventListener('click', () => {
-	menuPolozkyElement.classList.toggle('show')
-
-	if (menuPolozkyElement.classList.contains('show')) {
-		menuTlacitkoElement.innerHTML = '<i class="fas fa-xmark"></i>'
-	} else {
-		menuTlacitkoElement.innerHTML = '<i class="fas fa-bars"></i>'
-	}
-})
-
-const seznamFilmuElement = document.querySelector('#seznam-filmu')
-if (seznamFilmuElement) {
-	seznamFilmuElement.innerHTML = ''
-	filmy.forEach((film) => {
-		seznamFilmuElement.innerHTML += `
-			<div class="col">
-				<div class="card">
-					<img
-						src="${film.plakat.url}"
-						width="${film.plakat.width}"
-						height="${film.plakat.height}"
-						class="card-img-top"
-						alt="plakát"
-					/>
-					<div class="card-body">
-						<h5 class="card-title">${film.nazev}</h5>
-						<p class="card-text">
-						${film.ochutnavka}
-						</p>
-						<a href="film.html#${film.id}" class="btn btn-primary">Přehrát</a>
-					</div>
-				</div>
-			</div>
-		`
-	})
-}
-
 const detailFilmuElement = document.querySelector('#detail-filmu')
 if (detailFilmuElement) {
 	const idFilmu = location.hash.substring(1)
