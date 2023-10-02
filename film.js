@@ -1,5 +1,3 @@
-console.log('Funguju!')
-
 const filmy = [
 	{
 		id: 'pelisky',
